@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row" data-hook>
+         
+
+    <div id="content" class="col-sm-12" data-hook>
+      
+      <h1>My Account</h1>
+
+			<div data-hook="account_summary" class="account-summary well">
+			  <dl id="user-info">
+			    <dt>Email</dt>
+			    <dd><%= link_to spree_current_user.email, edit_user_path(spree_current_user) %></dd>
+
+			    <dt>Account Credit</dt>
+			    <dd><%= spree_current_user.account.blank? ? '-No accounts associated-' : spree_current_user.credit_limit %></dd>
+			  </dl>
+			</div>
+
+			<div data-hook="account_my_orders" class="account-my-orders">
+
+		  	<h3>My Orders</h3>
+		    <table class="table table-striped order-summary">
+		      <thead class="active">
+			      <tr>
+			        <th class="order-number">Number</th>
+			        <th class="order-date">Date</th>
+			        <th class="order-status">Status</th>
+			        <th class="order-payment-state">Payment State</th>
+			        <th class="order-shipment-state">Shipment State</th>
+			        <th class="order-total">Total</th>
+			      </tr>
+		      </thead>
+		      <tbody>
+		        <% if spree_current_user.orders.blank? %>
+		          <p>No Orders found...</p>
+		        <% else %>
+		          <% for order in spree_current_user.orders %>
+		            <tr>
+				        	<td class="order-number"><%= link_to order.number, order_path(order) %></td>
+				        	<td class="order-date"><%= order.created_at.strftime("%d-%m-%Y") %></td>
+				        	<td class="order-status"><%= order.payments.blank? ? 'NA' : order.payments.first.state %></td>
+				        	<td class="order-payment-state"><%= order.payment_state %></td>
+				        	<td class="order-shipment-state"><%= order.shipment_state %></td>
+				        	<td class="order-total"><%= order.total.to_f %></td>
+			        	</tr>
+			        <% end %>
+		        <% end %>
+		      </tbody>
+		    </table>
+		  </div>
+	  </div>
+
+	</div>
+</div>
