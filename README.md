@@ -1,6 +1,4 @@
-# spree-customised
-
-Credit App
+# Credit App
 ==========
 
 This is a spree customized application with an extra payment method. Application uses Rails 4.2 and Ruby 2.1 version. Sqlite3 is used as the backend database.
